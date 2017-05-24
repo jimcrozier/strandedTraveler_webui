@@ -1,0 +1,324 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+body {
+  background-color: #91A4B7;
+  min-width: 1200px;
+}
+.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: 0px;
+}
+/*Sidebar*/
+#sidebar {
+  background-color: white;
+  box-shadow: -3px 0px 20px;
+  padding: 0px;
+  height: 100vh;
+}
+#sidebarTop {
+  background-color: black;
+  padding: 15px;
+  padding-bottom: 3px;
+  width: 100%;
+  height: 140px;
+  z-index: 5;
+}
+#sidebarBottom {
+  overflow-y: auto;
+  height: calc(100% - 140px);
+}
+#issuesList h4 .label {
+    float: right;
+}
+#issuesList .noIssuesYet {
+    display: block;
+    margin-top: 30px;
+    font-style: italic;
+    text-align: center;
+}
+#issuesList .panel-title {
+    float: left;
+}
+#playbackButton {
+    margin-top: 8px;
+    margin-right: 5px;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    width: 1.7em;
+    border: 1px solid white;
+    float: right;
+    color: white;
+}
+#sidebarTop h1 {
+  margin: 3px;
+  margin-top: 5px;
+  font-size: 200%;
+  border-bottom: 1px solid white;
+  padding-bottom: 10px;
+  color: white;
+}
+#sidebarTop h3 {
+  margin: 10px 3px;
+  color: white;
+  font-size: 120%;
+  float: left;  
+}
+#sidebarTop #logo {
+  margin-left: 5px;
+  width: 223px;
+  height: 34px;
+  background-size: 223px 34px;
+  background-color: black;
+}
+#sidebar .list-group-item:first-child {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top: 0px;
+}
+#sidebar a.list-group-item {
+  background-color: Transparent;
+}
+#sidebar a.list-group-item:focus {
+  background-color: Transparent;
+}
+#sidebar a.list-group-item.active {
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+/*Issue Details*/
+#issueDetails .time {
+    font-size: 110%;
+    font-weight: bold;
+}
+#issueDetails .leftCol, #issueDetails .rightCol {
+    width: 50%;
+    float: left;
+}
+#issueDetails .title h4 {
+    display: inline;
+}
+#issueDetails .title .label {
+    position: relative;
+    top: -3px;
+}
+#issueDetails button {
+    margin-top: 5px;
+}
+/*App Icon*/
+#mobileAppIconBox button {
+  background-color: Transparent;
+  border: none;
+  outline: none;
+}
+#mobileAppIconWrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+}
+#mobileAppIconWrapper #appIcon {
+    border-radius: 25px;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+}
+#mobileAppIconWrapper .unreadNotifications {
+    position: absolute;
+    top: -15px;
+    left: 75px;
+    font-size: 180%;
+    z-index: 100;
+    border-radius: 40px;
+    background-color: red;
+}
+#content .row {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+#mapBox svg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*Customer View*/
+.modal#customerView .modal-dialog {
+    margin-top: 50px;
+    width: 80vw;
+    overflow: hidden;
+}
+.modal#customerView .modal-dialog .modal-body {
+    overflow: hidden;
+}
+#customerView .modal-body {
+  padding: 50px;
+}
+#customerDevice {
+  border: 1px solid gray;
+  height: 710px;
+  width: 400px;
+  float: left;
+  overflow: hidden;
+}
+#customerDeviceHeader {
+  height: 60px;
+  padding: 5px 60px;
+}
+#customerDeviceHeader img {
+  height: 40px;
+  position: relative;
+  top: 3px;
+  float: left
+}
+#customerDeviceHeader #customerDeviceText {
+  font-size: 160%;
+  position: relative;
+  top: 9px;
+  font-weight: bold;
+  float: left;
+  margin: 0px 10px;
+}
+#customerDeviceHeader #customerDeviceLogo {
+  width: 180px;
+  height: 30px;
+  float: left;
+  position: relative;
+  top: 9px;
+
+}  
+#customerDeviceView {
+  height: 650px;
+  width: 400px;
+  border: 0px solid gray;
+}
+#customerViewDetails {
+  padding: 0px 30px;
+  float: left;
+  margin-left: 30px;
+  width: calc(80vw - 532px);
+}
+#customerViewStatus {
+  width: 100%;
+  border: 0px solid black;
+  font-size: 12pt;
+}
+#customerViewStatus .detailTitle {
+  font-weight: bold;
+  margin-right: 15px;
+  font-size: 20pt;
+}
+#customerViewStatus .detailStatus
+{
+  font-size: 15pt;
+  float: right;
+}
+#customerViewNav {
+  width: 100%;
+  font-size: 13pt;
+  text-align: center;
+  border-top: 1px solid gray;
+  padding-top: 15px;
+}
+#customerDocument {
+  overflow-y: auto;
+  margin-top: 15px;
+  table-layout: fixed;
+}
+#keyCol {
+  width: 35%;
+}
+#valueCol {
+  width: 65%;
+}
+#customerView button {
+  background-color: Transparent;
+  border: none;
+  outline: none;
+}
+#customerView button:disabled {
+  color: #DDD;
+}
+/* Settings Menu */
+#settingsMenu {
+	z-index: 100;
+	position: absolute;
+	margin: 25px;
+}
+#settingsMenu button {
+	background: Transparent;
+	border: none;
+	outline: none;
+	color: white;
+}
+#settingsMenu.open button {
+	color: #AAA;
+}
+.dropdown-submenu {
+    position: relative;
+}
+.dropdown-menu li a {
+	outline: none;
+}
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: black;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: white;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+.dropdown-menu li a:hover,
+.dropdown-menu li.checked a:hover .glyphicon {
+	background-color: #337ab7;
+	color: white;
+}
+.dropdown-menu li a:hover .glyphicon,
+.dropdown-menu li a .glyphicon {
+	color: Transparent;
+	margin-left: -10px;
+	margin-right: 10px;
+}
+.dropdown-menu li.checked a .glyphicon {
+	color: black;
+}

@@ -1,0 +1,62 @@
+body {
+    background-color: #94bbd8;
+}
+.panel-heading, .panel {
+    border-color: #00467f;       
+}
+#issue-dashboard .panel-heading {
+    background-color: #00467f;
+    color: white;   
+}
+#sidebarTop h1 {
+  color: #0078d2;
+}
+#sidebarTop h3 {
+  color: #0078d2;
+}
+#playbackButton {
+  color: #0078d2;
+  border-color: #0078d2; 
+}
+#playbackButton:hover {
+    background-color: #E2E2E2;
+}
+#sidebarTop {
+    background-color: white;
+    height: 150px;
+    border-bottom: 1px solid #BBB;
+}
+#sidebarTop h1 {
+  border-bottom-color: #0078d2;    
+}
+#sidebarTop #logo {
+  width: 270px;
+  height: 42px;
+  background-size: 270px 42px;
+    background-color: white;
+  background-image:  url("/static/customer/american-logo.png");
+}
+#mobileAppIconWrapper #appIcon {
+  background-size: 100px 100px;
+  background-image: url("/static/customer/american-appicon.jpg");
+}
+#sidebarBottom {
+  height: calc(100% - 150px);
+  background-color: #EEE;
+}
+#customerDeviceHeader {
+  background-color: #122759;
+  color: white;
+}
+#customerDeviceHeader #customerDeviceLogo {
+  background-image: url("/static/customer/american-white.png");
+  width: 200px;
+  height: 30px;
+  background-size: 200px 30px;
+  top: 9px;
+
+}
+#customerDeviceHeader {
+    padding-left: 55px;
+    background-color: #0078d2;
+}

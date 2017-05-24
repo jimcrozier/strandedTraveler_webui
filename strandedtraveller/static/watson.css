@@ -1,0 +1,91 @@
+body {
+    margin: 0px;
+    font-family: "Helvetica", sans-serif;
+    overflow: hidden;
+    color: #5a5a5a;
+    font-size: 12pt;
+}
+container {
+    height: 100%;
+    min-height: 100%;
+    width: 100vw;
+}
+#conversation {
+    height: calc(100vh - 50px);
+    width: 100%;
+    min-height: 10px;
+    overflow-y: auto;
+}
+.chatBubble {
+    padding: 10px 13px;
+    clear: both;
+    max-width: 60%;
+    border-radius: 15px;
+    margin: 10px;
+}
+.chatBubble p {
+    margin: 0px;
+}
+.chatBubble ul {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.chatBubble ul li {
+    border-top: 1px solid #BBB;
+    margin-top: 15px;
+    padding-top: 15px;
+    list-style: none;
+    overflow: hidden;
+}
+.chatBubble button {
+    background-color: #33bdef;
+    border-radius: 15px;
+    font-size: 12pt;
+    color: white;
+    text-shadow: 0px 1px 0px #5b6178;
+    cursor: pointer;
+    outline: none;
+    border: 0px;
+    padding: 5px 10px;
+    float: right;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.chatBubble button:disabled {
+    background-color: #999;
+    color: #CCC;
+    cursor: default;
+}
+.chatBubble.you {
+    background-color: #33bdef;
+    float: right;
+    color: white;
+}
+.chatBubble.watson {
+    background-color: #ececec; 
+    float: left;
+}
+#bottomBar {
+    height: 50px;
+    background-color: #EEE;
+    border-top: 1px solid #BBB;
+}
+#bottomBar #userInput {
+    border: 1px solid #BBB;
+    border-radius: 15px;
+    width: calc(100% - 53px);
+    height: 25px;
+    font-size: 10pt;
+    padding: 3px 15px;
+    margin-top: 7px;
+    margin-left: 10px;
+    outline: none;
+}
+#watsonLoading {
+    width: 60px;
+    height: 60px;
+    clear: both;
+    float: left;
+    padding: 10px calc(50% - 30px);
+}

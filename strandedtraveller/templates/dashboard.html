@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>{{ customer.name }} Issue Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='map_style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename=customer.css) }}" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/kartograph-js/0.8.7/kartograph.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='offers.js') }}"></script>
+    <script type="text/javascript">
+    var isGeneric = {{ customer.generic }};
+    var customerName = "{{ customer.name }}";
+    var customerCode = "{{ customer.code }}";
+    var HUB_ACTIVITY_THRESHOLD = 600;
+    var LARGE_ACTIVITY_THRESHOLD = {{ customer.largeActivityThreshold }};
+    var playbackDate = new Date(Date.UTC(2015, 0, 26, 17, 42, 0, 0));
+    var playbackSpeed = 200.0;
+    var iframeURL = '{{ url_for('watson_talk', passengerExceptionID="", language="replaceWithLanguage") }}'
+    $(document).ready(function(){
+        var routeMap = kartograph.map("#mapBox");
+        var mapPairs = {{ mapPairs|tojson }};
+        var airports = {{ airports|tojson }};
+        routeMap.loadMap("{{ url_for('static', filename='route_map.svg') }}", function() {
+            routeMap.addLayer("stateBoundaries");
+            addRoutesToMap(routeMap, mapPairs);
+            addAirportsToMap(routeMap, airports);
+            startPlayback();
+        });
+        $("#mapBox").click( function() {
+            hideIssueDetails();
+        });
+
+        $(".ctrls").click( function(e) {
+            e.stopPropagation(); // this stops the event from bubbling up to the body
+        });   
+    });
+    
+    </script>
+</head>
+<body id="issue-dashboard">
+    
+    <div class="modal" id="customerView" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+              <div id="customerDevice">
+                  <div id="customerDeviceHeader"><img src="{{ url_for('static', filename='watson_logo.png') }}"><span id="customerDeviceText">+</span><div id="customerDeviceLogo"></div></div>
+                  <iframe id="customerDeviceView" src=""></iframe>
+              </div>
+              <div id="customerViewDetails">
+                  <div id="customerViewStatus">
+                      <span class="detailTitle"></span>
+                      <span class="detailOrigin"></span> &#9656; <span class="detailDestination"></span>
+                      <span class="label label-warning detailStatus"></span>
+                  </div>
+                  <div id="customerViewNav">
+                      <button onclick="" class="previousButton"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                      <span id="customerText">Passenger 1 of 37</span>
+                      <button onclick="" class="nextButton"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                  </div>
+                  <table id="customerDocument" class="table table-striped table-bordered">
+                      <thead>
+                          <tr>
+                              <th id="keyCol">Key</th>
+                              <th id="valueCol">Value</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+        <div id="sidebar" class="col-xs-3">
+            <div id="sidebarTop">
+                <div id="logo"></div>
+                <h1 id="logoTitle">Issue Tracker</h1>
+                <h3 id="listTitle">Current Issues:</h3>
+                <a id="playbackButton" href="#" onclick="togglePlayback();"><span class="glyphicon glyphicon-pause"></span></a>
+            </div>
+            <div id="sidebarBottom">
+                <div id="issuesList" class="list-group">
+                    <span class="noIssuesYet">No issues yet.</span>
+                </div>
+            </div>
+        </div>
+        <div id="content" class="col-xs-9">
+            <div id="settingsMenu" class="dropdown">
+              <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu multi-level" aria-labelledby="dLabel">
+                <li id="language" class="dropdown-submenu">
+                    <a tabindex="-1" href="#">Offer Language</a>
+                    <ul class="dropdown-menu">
+                        <li class="checked" id="en"><a  onclick="changeLanguage('en')" tabindex="-1" href="#"><span class="glyphicon glyphicon-ok"></span>English</a></li>
+                        <li id="cn"><a href="#"onclick="changeLanguage('cn')"><span class="glyphicon glyphicon-ok"></span>中文 (Chinese)</a></li>
+                    </ul>
+                </li>
+              </ul>
+            </div>
+            <div id="mapBox"></div>
+            <div class="row">
+            <div class="col-md-10">
+                <div id="issueDetails" class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Flight Details</h3>
+                </div>
+                <div class="panel-body noSelection">
+                    Select an issue from the list.
+                </div>
+                <div class="panel-body issueSelected" style="display:none;">
+                    <div class="leftCol">
+                        <div class='title detailsLeft'>
+                            <h4 class="detailTitle"></h4>
+                            <span class="label label-warning detailStatus">Delayed 2h46m</span>
+                        </div>
+                        <div class="routeText detailsLeft">
+                            <span class="detailOrigin"></span> &#9656; <span class="detailDestination"></span>
+                        </div>
+                        <div class="detailsLeft">
+                            Original Departure: <span class="time detailScheduledDeparture">3:00 PM</span>
+                        </div>
+                        <div class="detailsLeft">
+                            Expected Departure: <span class="time detailActualDeparture">8:26 PM</span>
+                        </div>
+                    </div>
+                    <div class="rightCol">
+                        <div class="detailsLeft">
+                            Caused by: <span class="detailDelayReason">Aircraft Issue</span>
+                        </div>
+                        <div class="detailsLeft">
+                            <span class="detailCustomersMiss time">0</span> customers will be affected by this issue.
+                        </div>
+                        <button type="button" class="btn btn-success" onclick="createOffers()">Send Offers to App <span class="glyphicon glyphicon-send"></span></button>
+                        <span id="progressMessage" style="display:none;">Creating offers... <img src="{{ url_for('static', filename='spinner.svg') }}" id="offerSpinner" /></span>
+                        <span id="doneMessage" style="display:none;"><span class="offerCount">0</span> offers delivered. <span class="glyphicon glyphicon-ok"></span></span>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div id="mobileAppIconBox" class="col-md-2">
+                <div id="mobileAppIconWrapper">
+                <span class="label label-danger unreadNotifications offerCount" style="display: none;">1</span>
+                    <button type="button" onclick="displayPassenger(0)" data-toggle="modal" href="#customerView" disabled>
+                        <div id="appIcon"></div>
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>     
+    </div>
+</body>
+</html>

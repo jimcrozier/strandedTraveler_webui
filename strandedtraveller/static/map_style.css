@@ -1,0 +1,48 @@
+.stateBoundaries {
+    fill: #EEE;
+    stroke-width: 1px;
+    stroke: #CCC;
+}
+.route {
+    stroke: #DDD;
+}
+.route.delayed {
+    stroke: yellow;
+}
+.route.cancelled {
+    stroke: red;
+}
+.airportCode {
+    display: none;
+    transform: translate(0px, -10px);
+}
+.airportDot {
+    fill: #2386C3;
+    stroke: #2386C3;
+}
+text.airportCode.large {
+    display: block;
+    
+}
+text.airportCode.JFK {
+    transform: translate(15px, 0px);    
+}
+text.airportCode.BOS {
+    transform: translate(15px, 0px);    
+}
+text.airportCode.MCO {
+    transform: translate(-15px, 0px);    
+}
+text.airportCode.LAX {
+    transform: translate(-15px, 0px);    
+}
+text.airportCode.DTW {
+    transform: translate(10px, -10px);    
+}
+.route.delayed {
+  stroke: #f0ad4e;
+  stroke-width: 2px;
+}
+.route.cancelled {
+  stroke-width: 1px;
+}

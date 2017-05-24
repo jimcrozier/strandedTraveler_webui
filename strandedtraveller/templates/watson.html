@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='watson.css') }}" />
+    <script type="text/javascript">
+    var currentContext = {};
+    var language = '{{ language }}';
+    var isGeneric = {{ isGeneric }};
+    $(function() {
+        _sendMessage({message: "yes", context: currentContext, isGeneric: isGeneric})
+    });
+    function scrollConversation() {
+        $("#conversation").stop().animate({ scrollTop: $("#conversation")[0].scrollHeight }, "slow");
+    }
+    function appendNewBubble(speaker, message) {
+        //disable buttons in existing bubbles
+        $(".chatBubble button").attr("disabled", true);
+        var newBubbleHTML = "<div class='chatBubble'></div>";
+        var chatBubble = $(newBubbleHTML).insertAfter(".chatBubble:last-of-type").hide().fadeIn();
+        if (chatBubble.length < 1) {
+            chatBubble = $(newBubbleHTML).prependTo("#conversation").hide().fadeIn();
+        }
+        scrollConversation();
+        chatBubble.html(message);
+        chatBubble.find("button").each(function (i) {
+            var theMessage = $(this).html();
+            $(this).attr("onclick", "sendMessage('"+theMessage+"')");
+        });
+        chatBubble.addClass(speaker);
+    }
+    function showLoading() {
+        scrollConversation();
+        $("#watsonLoading").fadeIn();
+    }
+    function hideLoading() {
+        $("#watsonLoading").hide();
+    }
+    function _sendMessage(data) {
+        showLoading();
+        var messageAPIURL = "{{ url_for('watson_message', language=language, passengerExceptionID=passengerExceptionID) }}";
+        $.ajax({
+                url: messageAPIURL,
+                data: JSON.stringify(data),
+                type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            success: function(resp) {
+                hideLoading();
+                response = resp.response;
+                currentContext = resp.context;
+                appendNewBubble("watson", response);
+            }
+        });
+        
+    }
+    function sendMessage(message) {
+        appendNewBubble("you", message);      
+        var data = {message: message, context: currentContext, isGeneric: isGeneric};
+        _sendMessage(data);
+        
+    }
+    function inputKeyDown(event) {
+        if (event.keyCode == 13) {
+            var message = $("#userInput").val();
+            $("#userInput").val("");
+            $("#userInput").blur();
+            sendMessage(message);
+        }
+    }
+    </script>
+</head>
+<body id="watson">
+    <div id="container">
+        <div id="conversation">
+            <img id="watsonLoading" style="display: none;" src="{{ url_for('static', filename='watson-loading.gif') }}" alt="Loading..." />           
+        </div>
+        <div id="bottomBar">
+            <form action="#" onsubmit="return false;"><input type="text" id="userInput" placeholder="Respond here." onkeydown="inputKeyDown(event)"></input></form>
+        </div>
+    </div>
+</body>
+</html>

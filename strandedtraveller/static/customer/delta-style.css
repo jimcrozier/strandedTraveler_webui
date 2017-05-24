@@ -1,0 +1,59 @@
+body {
+font-family: 'Open Sans', sans-serif;
+background-color: #53708c;
+}
+.panel-heading, .panel {
+    border-color: #032653;       
+}
+#issue-dashboard .panel-heading {
+    background-color: #032653;
+    color: white;   
+}
+#sidebarTop h1 {
+  color: white;
+  padding-left: 72px;
+  border-bottom: 1px solid white;
+}
+#sidebarTop h3 {
+  color: white;
+}
+#playbackButton {
+  color: white;
+  border-color: white; 
+}
+#playbackButton:hover {
+    background-color: #444;
+}
+#sidebarTop {
+    background-color: #032653;
+    height: 165px;
+    border-bottom: 1px solid #BBB;
+}
+#sidebarTop #logo {
+  margin-top: 10px;
+  width: 270px;
+  height: 42px;
+  background-size: 270px 42px;
+    background-color: Transparent;
+  background-image:  url("/static/customer/delta-white.png");
+}
+#mobileAppIconWrapper #appIcon {
+  background-size: 100px 100px;
+  background-image: url("/static/customer/delta-appicon.jpg");
+}
+#sidebarBottom {
+  height: calc(100% - 165px);
+  background-color: #EEE;
+}
+#customerDeviceHeader {
+  background-color: #122759;
+  color: white;
+}
+#customerDeviceHeader #customerDeviceLogo {
+  background-image: url("/static/customer/delta-white.png");
+  width: 180px;
+  height: 30px;
+  background-size: 180px 30px;
+  top: 9px;
+
+}  

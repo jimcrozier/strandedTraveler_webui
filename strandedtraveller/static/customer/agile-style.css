@@ -1,0 +1,60 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+.panel-heading, .panel {
+    border-color: #1fb3fd;      
+}
+#issue-dashboard .panel-heading {
+    background-color: #1fb3fd;
+    border-bottom-color: #1fb3fd;
+    color: white;   
+}
+#sidebarTop h1 {
+  color: white;
+  padding-left: 5px;
+  border-bottom: 1px solid white;
+}
+#sidebarTop h3 {
+  color: white;
+}
+#playbackButton {
+  color: white;
+  border-color: white; 
+}
+#playbackButton:hover {
+    background-color: #444;
+}
+#sidebarTop {
+    background-color: #1fb3fd;
+    height: 215px;
+    border-bottom: 1px solid #BBB;
+}
+#sidebarTop #logo {
+  margin-top: -10px;
+  width: 270px;
+  height: 119px;
+  background-size: 270px 119px;
+    background-color: Transparent;
+  background-image:  url("/static/customer/agile-noairlines.png");
+}
+#mobileAppIconWrapper #appIcon {
+  background-size: 100px 100px;
+  background-image: url("/static/customer/agile-appicon.png");
+}
+#sidebarBottom {
+  height: calc(100% - 215px);
+  background-color: #EEE;
+}
+#customerDeviceHeader {
+  background-color: #1fb3fd;
+  color: white;
+  padding-left: 97px;
+}
+#customerDeviceHeader #customerDeviceLogo {
+  background-image: url("/static/customer/agile-blue.png");
+  width: 110px;
+  height: 60px;
+  background-size: 110px 60px;
+  top: -5px;
+
+}  

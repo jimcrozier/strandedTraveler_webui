@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+    window.onload = function () {
+        var newURL = window.location.href + 'watson'
+        document.getElementById("mobileURL").setAttribute("href", newURL);
+        document.getElementById("mobileURL").innerHTML = newURL;
+    }
+    
+    </script>
+</head>
+<body>
+    <h1>IBM &quot;Stranded Traveler&quot; Open Source Demo</h1>
+    <h2>Generic, non-branded demo:</h2>
+        <li><a href='{{ url_for("issue_dashboard", airlineName="generic") }}'>Generic (Agile Airlines)</a></li>
+    <h2>Branded demos:</h2>
+    <ul>
+    {% for key, airline in customers.iteritems() %}
+        <li><a href='{{ url_for("issue_dashboard", airlineName=key) }}'>{{ airline.name }}</a></li>
+    {% endfor %}
+    </ul>
+    <h2>Mobile Access:</h2>
+    Use this URL to view the mobile portion of the demo on an actual phone or tablet. <br />
+    Note that this will only work properly <strong>after</strong> offers have been created and viewed on the regular web app (links above):<br />
+    <a href="url" id="mobileURL">url</a>
+    <div style='color:red;'>
+        <h2>Caveats and Warnings:</h2>
+        <ul>
+            <li>The demo should work in any modern browser, but has been tested thoroughly in Chrome only.</li>
+            <li>Be sure to select a cancelled flight, not a delayed flight. Offer creation has not been implemented for delayed flights.</li>
+        </ul>
+    </div>
+    <p>Questions? Contact Adam Johnson at adam.johnson@us.ibm.com.</p>
+</body>
+</html>
+        
